@@ -53,10 +53,10 @@ export class Character {
     takeDamage(amount: number): void {
         if (amount >= 0) {
             this.health -= amount
-            logger(`${this.name} ${amount} health points.`) //reduce life
+            logger(`${this.name} lost ${amount} health points.`) //reduce life
             if(this.health <= 0) {
                 this.health = 0
-                logger(`${this.name} died. ${this.health} health points.`) // if stay 0, it die
+                logger(`${this.name} died.`) // if stay 0, it die
             }
         }
     }
