@@ -35,12 +35,24 @@ export class Mage extends Character {
         if (this.mana < this.spell.getManaCost()) {
             logger(`Insufficient mana to use this spell.`)
         } else {
-            this.mana -= this.spell.getManaCost()                               //Quero colocar o sistema de restaurar mana usando setInterval
+            this.mana -= this.spell.getManaCost()
             logger(`
                     ${this.name} cats ${this.spell.getName()}
                     Damage: ${this.spell.getDamage()}
                     Mana remaining: ${this.mana}
                     `)
         }
+        const manaInterval = setInterval(() => {
+            if (this.mana < 100) {
+                this.mana = Math.min(this.mana + 5, 100);
+        
+                if (this.mana === 100) {
+                    logger(`${this.name} your mana is full`);
+                    clearInterval(manaInterval);                             
+                } else {
+                    logger(`${this.name} restored 5 mana. Now you have ${this.mana}`);
+                }
+            }
+        }, 5000);
     }
 }
