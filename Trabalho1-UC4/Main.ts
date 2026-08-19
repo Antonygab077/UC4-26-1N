@@ -5,13 +5,14 @@ import { Weapon } from "./Weapon"
 import { Warrior } from "./Warriors"
 import { Mage } from "./Mage"
 import { Party } from "./Party"
+import { Monster } from "./Monster"
 
 
 //EXPORTS
 export  const ask = require(`readline-sync`)
 export const logger = console.log
 
-//TESTS
+// TESTS
 // //Instantiating characters
 // const character1 = new Character(`Washington`, 20, 100)
 // const character2 = new Character(`Rapino`, 22, 80)
@@ -35,25 +36,25 @@ export const logger = console.log
 // //Instantiating party
 // const party1 = new Party(`Quebradinhas`, [])
 
-// //Methods characters
+// //Character methods
 // character1.showInfo()
 // character1.takeDamage(20)
 
-// //Methods weapons
+// //Weapon methods
 // weapon1.showInfo()
 
-// //Methods spells
+// //Spell methods
 // spell1.showInfo()
 
-// //Methods warriors
+// //Warrior methods
 // warrior1.attack()
 // warrior1.showInfo()
 
-// //Methods mages
+// //Mage methods
 // mage1.castSpell()
 // mage1.showInfo()
 
-// //Methods party
+// //Party methods
 // party1.addParty(warrior1)
 // party1.addParty(warrior2)
 // party1.addParty(mage1)
@@ -63,26 +64,29 @@ export const logger = console.log
 
 //DEMONSTRATION
 
-//Criar as armas.
+//Create the weapons.
 const weapon1 = new Weapon(`Whinchester22`, 35)
 const weapon2 = new Weapon(`Taco de baisebol`, 30)
 
-//Criar as magias.
+//Create the spells.
 const spell1 = new Spell(`Avara Quebrada`, 40, 25)
 const spell2 = new Spell(`Torta na cara`, 35, 20)
 
-//Criar os personagens.
+//Create the characters.
 const warrior1 = new Warrior(`Washington`, 20, 100, 40, weapon1)
 const warrior2 = new Warrior(`Claudio Vasconcelos`, 18, 100, 50, weapon2)
 
 const mage1 = new Mage(`Rapino`, 22, 80, 100, spell1)
 const mage2 = new Mage(`Bibi pirigosa`, 28, 80, 100, spell2)
 
-//Criar uma Party.
+//Create a Party.
 const party1 = new Party(`Quebradinhas`, [])
 
+//Create a monster.
+const monster1 = new Monster(`Aragorn`, 20, 130, 20)
+
 console.clear()
-//Adicionar os personagens à Party.
+//Add the characters to the Party.
 party1.addParty(warrior1)
 party1.addParty(warrior2)
 party1.addParty(mage1)
@@ -90,12 +94,12 @@ party1.addParty(mage2)
 ask.question(`Press ENTER to continue...`)
 console.clear()
 
-//Adicionar os personagens à Party.
+//Display the Party members.
 party1.showMember()
 ask.question(`Press ENTER to continue...`)
 console.clear()
 
-//Exibir as informações dos personagens.
+//Display the characters' information.
 warrior1.showInfo()
 warrior2.showInfo()
 
@@ -104,29 +108,48 @@ mage2.showInfo()
 ask.question(`Press ENTER to continue...`)
 console.clear()
 
-//Fazer os Warriors atacarem.
+//Make the Warriors attack.
 warrior1.attack()
 warrior2.attack()
 
-//Fazer os Mages lançarem suas magias.
+//Make the Mages cast their spells.
 mage1.castSpell()
 mage2.castSpell()
 ask.question(`Press ENTER to continue...`)
 console.clear()
 
-//Demonstrar o consumo de mana.
-//Consumo de mana ta junto no castSpell
+//Demonstrate mana consumption.
+//Mana consumption is handled inside castSpell.
 
-//Causar dano a pelo menos um personagem.
+//Deal damage to at least one character.
 warrior2.takeDamage(30)
 ask.question(`Press ENTER to continue...`)
 console.clear()
 
-//Alterar algum atributo utilizando um setter.
+//Change an attribute using a setter.
 warrior1.setName(`Julio Pistolada`)
 
-//Remover um personagem da Party.
+//Remove a character from the Party.
 party1.removeParty(mage1)
 
-//Exibir novamente a Party após a remoção.
+//Display the Party again after the removal.
 party1.showMember()
+ask.question(`Press ENTER to continue...`)
+console.clear()
+
+//Display the monster's information.
+logger(`A MONSTER APPEARED!!`)
+monster1.showInfo()
+
+//Monster attacking.
+monster1.attack(warrior1)
+ask.question(`Press ENTER to continue...`)
+console.clear()
+
+// ---------------------------------------------------------------------------------
+
+//NOTES
+//AI was not used to write the code, only to explain what some things are used for.
+//Where AI was used:
+//1 - To remember Math.random and Math.floor = Line 64 of the Monster.ts file
+//2 - To learn about Math.min = Line 47 of the Mage.ts file
